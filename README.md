@@ -272,11 +272,3 @@ This project is released under the terms specified in the `LICENSE` file.
 * Package as a Python module
 * Add unit tests for helper utilities
 
----
-
-If you want, I can also:
-
-* Harden this into a production-ready repo
-* Convert it into a FastAPI inference service
-* Add experiment tracking (Weights & Biases / MLflow)
-* Clean up the checkpoint schema
