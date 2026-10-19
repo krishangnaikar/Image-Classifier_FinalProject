@@ -51,8 +51,8 @@ def get_input_args():
                     help = 'path to the folder of training images eg: flowers') 
     parser.add_argument('--save_dir', type = str, default ='./checkpoint.pth',
                     help = 'path to the folder and file_name to save the trained model')
-    parser.add_argument('--arch', type = str, default = 'vgg16', 
-                    help = 'Which CNN architecture you want to use? -- densenet121, alexnet, or vgg16') 
+    parser.add_argument('--arch', type = str, default = 'vgg16', choices=tuple(arch_ins),
+                    help = 'Which CNN architecture you want to use? -- densenet121 or vgg16')
     parser.add_argument('--learning_rate', type = float, default = '0.001', 
                     help = 'learning rate for Gradient descent')
     parser.add_argument('--hid_units1', type = int, default = '1024', 

@@ -37,3 +37,18 @@ def test_invalid_training_arguments_fail(helper, monkeypatch, argv):
     with pytest.raises(SystemExit) as error:
         helper.get_input_args()
     assert error.value.code == 2
+
+@pytest.mark.parametrize('arch', ['alexnet', 'unknown'])
+def test_unsupported_architecture_fails_at_parse_time(helper, monkeypatch, capsys, arch):
+    monkeypatch.setattr(sys, 'argv', ['train.py', '--data_dir', 'images', '--arch', arch])
+    with pytest.raises(SystemExit) as error:
+        helper.get_input_args()
+    assert error.value.code == 2
+    message = capsys.readouterr().err
+    assert 'invalid choice' in message
+    assert 'vgg16' in message and 'densenet121' in message
+
+@pytest.mark.parametrize('arch', ['vgg16', 'densenet121'])
+def test_supported_architectures_are_accepted(helper, monkeypatch, arch):
+    monkeypatch.setattr(sys, 'argv', ['train.py', '--data_dir', 'images', '--arch', arch])
+    assert helper.get_input_args().arch == arch
